@@ -2,6 +2,10 @@ import os
 
 from flask import Flask
 
+# >> $env:FLASK_APP="flaskr"
+# >> $env:FLASK_ENV="development"
+
+
 def create_app(test_config=None):
     # Cria e configura o app
     app = Flask(__name__, instance_relative_config=True)
@@ -27,5 +31,8 @@ def create_app(test_config=None):
     @app.route('/hello')
     def hello():
         return 'Hello, World!'
+
+    from . import db
+    db.init_app(app)
 
     return app
